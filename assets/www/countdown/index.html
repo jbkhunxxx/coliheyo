@@ -1,26 +1,60 @@
-
-<!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!DOCTYPE html><!--M3 Release-->
+<html>
 <head>
-  <meta charset="utf-8" />
+    <title>Belltimes</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/foundation.css">
+    <script src="../js/vendor/custom.modernizr.js"></script>
+    <!--Android Specific-->
+    <script type="text/javascript" charset="utf-8" src="cordova-2.7.0.js"></script>
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript"language="javascript"src="counter.js"></script>
+    <!-- More Styles Baby-->
+    <style>
+        #week {
+            font-family: "Roboto", sans-serif;
+            text-align: center;
+            font-weight: 100;
+            font-size: 14px;
+            color: #0DB518;
+            top: 7px;
+            left: 10px;
+        }
+        #description {
+            font-family: 'Roboto', sans-serif;
+	    text-align: center;
+            font-weight: 300;
+            font-size: 50px;
+            color: #000000;
+            height: 80px;
+            line-height:50px;
+            padding-top:5px;
+            padding-bottom:0px;
+        }
+        #in {
+            font-family: 'Roboto', sans-serif;
+	    text-align: center;
+            font-style: normal;
+            font-weight: 100;
+            font-size: 22px;
+            color: #000000;
+            line-height:0px;
+            padding-top:0px;
+            padding-bottom:10px;
 
-  <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="width=device-width" />
-
-  <title>Timetable</title>
-
-  <!-- Included CSS Files -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/foundation.css">
-  
-
-  <script src="js/vendor/custom.modernizr.js"></script>
+        }
+        #counter {
+            font-family: 'Roboto', sans-serif;
+	    text-align: center;
+            font-size: 110px;
+            font-weight: 100;
+            color: #000000;
+            line-height: 1.1em;
+        }
+    </style>
 
 </head>
 <body>
-
   <!-- Header and Nav -->
   <nav class="top-bar">
     <ul class="title-area">
@@ -39,7 +73,7 @@
       <!-- Left Nav Section -->
       <ul class="left">
         <li class="divider"></li>
-        <li class="active"><a href="#">Overview</a></li>
+        <li><a href="../index.html">Overview</a></li>
         <li class="divider"></li>
         <li class="has-dropdown">
           <a class="active" href="#">Weeks In Cycle</a>
@@ -58,7 +92,7 @@
         <li class="divider"></li>
         <li><a href="#">Holiday</a></li>
         <li class="divider"></li>
-        <li><a href="countdown/index.html">Countdown Clock</a></li>
+        <li class="active"><a>Countdown Clock</a></li>
         <li class="divider"></li>
         <li class="has-dropdown">
           <a href="#">View Mode</a>
@@ -79,17 +113,16 @@
   <!-- Main Grid Section -->
 
   <div class="row">
-<h1>Hello</h1>
-<p>Nothing has really been done yet except for implementing countdown.</p>
+<h1>Countdown</h1>
+     <div id="week"></div>
+     <div id="container" class="centered">
+    	<div id="description"></div>
+    	<div id="in">in</div>
+    	<div id="counter"></div>
+     </div>
 
   </div>
-
-  <!-- End Grid Section -->
-
-
-
-  <!-- Footer -->
-
+ 
   <footer class="row">
     <div class="large-12 columns">
       <hr />
@@ -109,11 +142,10 @@
   ('__proto__' in {} ? 'zepto' : 'jquery') +
   '.js><\/script>')
   </script>
-  <script src="js/foundation.min.js"></script>
+  <script src="../js/foundation.min.js"></script>
   <script>
     $(document).foundation();
   </script>
 
 </body>
 </html>
-

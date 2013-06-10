@@ -21,6 +21,7 @@ package com.thesoftmodder.api13.timetable.html5;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
+//import android.view.WindowManager;
 
 public class Main extends DroidGap
 {
@@ -29,8 +30,11 @@ public class Main extends DroidGap
     {
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
+        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        //WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+        super.loadUrl("file:///android_asset/www/index.html");
     }
 }
 
