@@ -1,8 +1,4 @@
-
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
 
@@ -15,8 +11,19 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
   
-
+  <!-- Included JS Files -->
   <script src="js/vendor/custom.modernizr.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <!--Updater Script-->
+  <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+  <script type="text/javascript"language="javascript">
+      var appVersion = "1.1"; //REMEMBER Needs UPDATE
+      var updateAvailable = false;
+      var updateText;
+  </script>
+  <script type="text/javascript"language="javascript"charset="utf-8" src="https://raw.github.com/thesoftmodder/timetable-android-13-html5/downloads/upcode/updates.js"></script>
+ <!-- App Main Source -->
+  <script type="text/javascript"language="javascript"charset="utf-8" src="appfunc.js"></script>
 
 </head>
 <body>
@@ -58,7 +65,7 @@
         <li class="divider"></li>
         <li><a href="#">Holiday</a></li>
         <li class="divider"></li>
-        <li><a href="countdown/index.html">Countdown Clock</a></li>
+        <li><a href="countdown.html">Countdown Clock</a></li>
         <li class="divider"></li>
         <li class="has-dropdown">
           <a href="#">View Mode</a>

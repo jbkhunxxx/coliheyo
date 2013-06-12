@@ -1,14 +1,11 @@
-<!DOCTYPE html><!--M3 Release-->
+<!DOCTYPE html>
 <html>
 <head>
     <title>Countdown Clock</title>
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/foundation.css">
-    <script src="../js/vendor/custom.modernizr.js"></script>
-    <!--Android Specific-->
-    <script type="text/javascript" charset="utf-8" src="cordova-2.7.0.js"></script>
-    <script src="../js/vendor/jquery.js"></script>
-    <script type="text/javascript"language="javascript"src="counter.js"></script>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/foundation.css">
+    <script src="js/vendor/custom.modernizr.js"></script>
+    <script src="js/vendor/jquery.js"></script>
     <!-- More Styles Baby-->
     <style>
         #week {
@@ -63,6 +60,9 @@
             line-height: 1.1em;
         }
     </style>
+    <script type="text/javascript"language="javascript"src="counter.js"></script>
+    <!-- App Main Source -->
+    <script type="text/javascript"language="javascript"charset="utf-8" src="appfunc.js"></script>
 
 </head>
 <body>
@@ -157,7 +157,7 @@
   ('__proto__' in {} ? 'zepto' : 'jquery') +
   '.js><\/script>')
   </script>
-  <script src="../js/foundation.min.js"></script>
+  <script src="js/foundation.min.js"></script>
   <script>
     $(document).foundation();
   </script>
