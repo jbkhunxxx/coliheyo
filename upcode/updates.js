@@ -8,8 +8,13 @@ function onConfirm(button) {
 
 if (appVersion=="1.1"){
     updateAvailable = true;
-    alert("COME UPDATE");
-    updateText = "An update is available. Bugfixes New Features."
+    //updateText = "App Update Available"
+    navigator.notification.confirm(
+        'Updated App Contains New Features (v1.2)',  // message
+        onConfirm,              // callback to invoke with index of button pressed
+        'App Update Available',            // title
+        'Download,Later'          // buttonLabels
+    );
 }
 else if (appVersion=="1.2"){
     updateAvailable = false;
