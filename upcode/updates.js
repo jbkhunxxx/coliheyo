@@ -6,7 +6,7 @@ function onConfirm(button) {
     }
 }
 
-if (appVersion=="1.1"){
+if (appV=="1.1"){
     updateAvailable = true;
     //updateText = "App Update Available"
     navigator.notification.confirm(
@@ -16,7 +16,7 @@ if (appVersion=="1.1"){
         'Download,Later'          // buttonLabels
     );
 }
-else if (appVersion=="1.2"){
+else if (appv=="1.2"){
     updateAvailable = false;
     updateText = "latest"
 }
