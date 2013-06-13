@@ -6,7 +6,7 @@ function onConfirm(button) {
     }
 }
 
-if (appV=="1.1"){
+if (appv=="1.1"){
     updateAvailable = true;
     //updateText = "App Update Available"
     navigator.notification.confirm(
