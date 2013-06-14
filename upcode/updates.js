@@ -7,14 +7,15 @@ function onConfirm(button) {
 }
 
 if (appv=="1.1"){
-    updateAvailable = true;
+    /*updateAvailable = true;
     //updateText = "App Update Available"
     navigator.notification.confirm(
         'Updated App Contains New Features (v1.2)',  // message
         onConfirm,              // callback to invoke with index of button pressed
         'App Update Available',            // title
         'Download,Later'          // buttonLabels
-    );
+    );*/
+    console.log("Latest Version");
 }
 else if (appv=="1.2"){
     updateAvailable = false;
