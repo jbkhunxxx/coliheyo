@@ -4,6 +4,7 @@ function onConfirm(button) {
     }
 }
 
+<<<<<<< HEAD
 if (appv<1.11){
     updateAvailable = true;
     //updateText = "App Update Available"
@@ -16,6 +17,20 @@ if (appv<1.11){
     console.log("Latest Version");
 }
 else if (appv==1.11){
+=======
+if (appv=="1.1"){
+    /*updateAvailable = true;
+    //updateText = "App Update Available"
+    navigator.notification.confirm(
+        'Updated App Contains New Features (v1.2)',  // message
+        onConfirm,              // callback to invoke with index of button pressed
+        'App Update Available',            // title
+        'Download,Later'          // buttonLabels
+    );*/
+    console.log("Latest Version");
+}
+else if (appv=="1.2"){
+>>>>>>> ba981cafa6bfa1b126143cd5542063f40f758a26
     updateAvailable = false;
     updateText = "latest"
 }
