@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.File;
 
 import java.lang.Number;
 
@@ -24,6 +24,7 @@ import android.database.Cursor;
 
 import android.database.sqlite.*;
 
+import android.util.Base64;
 import android.util.Log;
 
 public class SQLitePlugin extends CordovaPlugin
@@ -95,7 +96,7 @@ public class SQLitePlugin extends CordovaPlugin
 					queryIDs = new String[len];
 					jsonparams = new JSONArray[len];
 
-					for (int i = 0; i < len; i++) 
+					for (int i = 0; i < len; i++)
 					{
 						a 			= txargs.getJSONObject(i);
 						queries[i] 	= a.getString("query");
@@ -152,61 +153,14 @@ public class SQLitePlugin extends CordovaPlugin
 	{
 		if (this.getDatabase(dbname) != null) this.closeDatabase(dbname);
 
-        String completeDBName = dbname + ".db";
-		File dbfile = this.cordova.getActivity().getDatabasePath(completeDBName);
-        if(!dbfile.exists())
-            copyPrepopulatedDatabase(completeDBName, dbfile);
+		File dbfile = this.cordova.getActivity().getDatabasePath(dbname + ".db");
 
-        Log.v("info", "Open sqlite db: " + dbfile.getAbsolutePath());
+		Log.v("info", "Open sqlite db: " + dbfile.getAbsolutePath());
 
 		SQLiteDatabase mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, null);
 
 		dbmap.put(dbname, mydb);
 	}
-
-    /**
-     * If a prepopulated DB file exists in the assets folder it is copied to the dbPath.
-     * Only runs the first time the app runs.
-     */
-    private void copyPrepopulatedDatabase(String completeDBName, File dbfile)
-    {
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            in = this.cordova.getActivity().getAssets().open(completeDBName);
-            String dbPath = dbfile.getAbsolutePath();
-            dbPath = dbPath.substring(0, dbPath.lastIndexOf("/") + 1);
-            File dbPathFile = new File(dbPath);
-            if (!dbPathFile.exists())
-                dbPathFile.mkdirs();
-
-            File newDbFile = new File(dbPath + completeDBName);
-            out = new FileOutputStream(newDbFile);
-
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0)
-                out.write(buf, 0, len);
-
-            Log.v("info", "Copied prepopulated DB content to: " + newDbFile.getAbsolutePath());
-        } catch (IOException e) {
-            Log.v("copyPrepopulatedDatabase", "No prepopulated DB found, Error=" + e.getMessage());
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException ignored) {
-                }
-            }
-
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException ignored) {
-                }
-            }
-        }
-    }
 
 	/**
 	 * Close a database.
@@ -280,6 +234,8 @@ public class SQLitePlugin extends CordovaPlugin
 							myStatement.bindDouble(j + 1, jsonparams[i].getDouble(j));
 						} else if (jsonparams[i].get(j) instanceof Number) {
 							myStatement.bindLong(j + 1, jsonparams[i].getLong(j));
+						} else if (jsonparams[i].isNull(j)) {
+							myStatement.bindNull(j + 1);
 						} else {
 							myStatement.bindString(j + 1, jsonparams[i].getString(j));
 						}
@@ -399,7 +355,7 @@ public class SQLitePlugin extends CordovaPlugin
 							switch(cur.getType (i))
 							{
 								case Cursor.FIELD_TYPE_NULL:
-									row.put(key, null);
+									row.put(key, JSONObject.NULL);
 									break;
 								case Cursor.FIELD_TYPE_INTEGER:
 									row.put(key, cur.getInt(i));
@@ -411,7 +367,7 @@ public class SQLitePlugin extends CordovaPlugin
 									row.put(key, cur.getString(i));
 									break;
 								case Cursor.FIELD_TYPE_BLOB:
-									row.put(key, cur.getBlob(i));
+									row.put(key, new String(Base64.encode(cur.getBlob(i), Base64.DEFAULT)));
 									break;
 							}
 						}

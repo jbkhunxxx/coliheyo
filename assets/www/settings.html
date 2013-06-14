@@ -5,30 +5,28 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>Timetable</title>
+  <title>Settings</title>
 
   <!-- Included CSS Files -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/fontawesome.css">
   
   <!-- Included JS Files -->
   <script src="js/vendor/custom.modernizr.js"></script>
   <script src="js/vendor/jquery.js"></script>
   <script src="js/vendor/jquery-ui.js"></script>
-  <!--Updater Script-->
   <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-  <script type="text/javascript"language="javascript">
-      var appVersion = "1.1"; //REMEMBER Needs UPDATE
-      var updateAvailable = false;
-      var updateText;
-  </script>
-  <script type="text/javascript"language="javascript"charset="utf-8" src="https://raw.github.com/thesoftmodder/timetable-android-13-html5/downloads/upcode/updates.js"></script>
+  
  <!-- App Main Source -->
-  <script type="text/javascript"language="javascript"charset="utf-8" src="appfunc.js"></script>
+  <!--<script type="text/javascript"language="javascript"charset="utf-8">
+	  
+  </script> -->
 
 </head>
-<body>
-
+<body onload="onLoad()">
+  <script type="text/javascript"language="javascript"charset="utf-8" src="appfunc.js"></script>
+  <script type="text/javascript"language="javascript"charset="utf-8" src="js/vendor/SQLitePlugin.js"></script>
   <!-- Header and Nav -->
   <nav class="top-bar">
     <ul class="title-area">
@@ -76,6 +74,7 @@
             <li><a href="#">Whole Timetable</a></li>
           </ul>
         </li>
+        <li class="active"><a>Settings</a></li>
        
       </ul>
     </section>
@@ -87,8 +86,8 @@
   <!-- Main Grid Section -->
 
   <div class="row">
-<h1>Hello</h1>
-<p>Nothing has really been done yet except for implementing countdown.</p>
+<h1>Settings</h1>
+<h4>Week Cycle Format</h4>
 
   </div>
 
