@@ -17,15 +17,15 @@ setInterval(function doCount(){
     //normal times
     var t1Hours = [9,9,10,10,11,11,12,12,13,14,15];
     var t1Minutes = [0,5,5,10,10,50,50,55,55,15,15];
-    var t1Desc = ["School Starts","Period 1","Period 1-2 Transition","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5","End of Day"];
+    var t1Desc = ["School Starts","Period 1","Period 1 Ends","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5","End of Day"];
 
     var t2Hours = [9,9,10,10,11,11,12,13,14,14,15];
     var t2Minutes = [0,5,5,10,10,30,30,10,10,15,15];
-    var t2Desc = ["School Starts","Period 1","Period 1-2 Transition","Period 2","Recess","Period 3","Lunch","Period 4","Period 4-5 Transition","Period 5","End of Day"];
+    var t2Desc = ["School Starts","Period 1","Period 1 Ends","Period 2","Recess","Period 3","Lunch","Period 4","Period 4 Ends","Period 5","End of Day"];
 
     var t3Hours = [9,9,10,10,11,12,13,13,14,14,15];
     var t3Minutes = [25,30,25,30,25,5,0,5,0,20,15];
-    var t3Desc = ["School Starts","Period 1","Period 1-2 Transition","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5","Weekend"];
+    var t3Desc = ["School Starts","Period 1","Period 1 Ends","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5","Weekend"];
     /*//assembly times
     var a1Hours = [9,9,10,10,11,11,12,13,13,13,14,15];
     var a1Minutes = [0,5,15,20,30,50,10,0,5,55,15,15];
@@ -41,9 +41,9 @@ setInterval(function doCount(){
 */
 
     //Now List
-    var now1 = ["No Classes","Period 1","Period 1-2 Transition","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5"];
-    var now2 = ["No Classes","Period 1","Period 1-2 Transition","Period 2","Recess","Period 3","Lunch","Period 4","Period 4-5 Transition","Period 5"];
-    var now3 = ["No Classes","Period 1","Period 1-2 Transition","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5"];
+    var now1 = ["No Classes","Period 1","Transition","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5"];
+    var now2 = ["No Classes","Period 1","Transition","Period 2","Recess","Period 3","Lunch","Period 4","Transition","Period 5"];
+    var now3 = ["No Classes","Period 1","Transition","Period 2","Lunch","Period 3","Period 3 Ends","Period 4","Recess","Period 5"];
 
     //begin logic
     var now = new Date();
@@ -89,6 +89,7 @@ setInterval(function doCount(){
                 }
                 else {
                     console.log("Bell is not altered. (status:"+data.status+", bellsAltered:"+data.bellsAltered+")");
+		    console.log("Test");
                 }
             },
             error: function(XHR, textStatus, errorThrown){
@@ -137,19 +138,22 @@ setInterval(function doCount(){
                 todayHours = t2Hours.slice(0);
                 todayMinutes = t2Minutes.slice(0);
                 todayDesc = t2Desc.slice(0);
-		nowd = now2.slice(0);
+		now = now2.slice(0);
+		console.log("Gay");
                 break;
             case 5: //fri
                 todayHours = t3Hours.slice(0);
                 todayMinutes = t3Minutes.slice(0);
                 todayDesc = t3Desc.slice(0); break;
 		todayNow = nowlist1.slice(0);
-		nowd = now3.slice(0);
+		now = now3.slice(0);
+		console.log("fLOPPY");
             default: //mon tues
                 todayHours = t1Hours.slice(0);
                 todayMinutes = t1Minutes.slice(0);
                 todayDesc = t1Desc.slice(0);
-		nowd = now1.slice(0);
+		now = now1.slice(0);
+		console.log("dick");
                 break;
         }
     }
@@ -191,12 +195,12 @@ setInterval(function doCount(){
     //display
 	//This period only
     a = i-1
-    if (a==-1){
-        document.getElementById("now").innerHTML= "Now: <b>" + nowd[i] + "</b>";
+    /*if (a==-1){
+        document.getElementById("now").innerHTML= "Now: <b>" + now[i] + "</b>";
     }
     else{
-        document.getElementById("now").innerHTML= "Now: <b>" + nowd[a] + "</b>";
-    }
+        document.getElementById("now").innerHTML= "Now: <b>" + now[a] + "</b>";
+    } */
     document.getElementById("description").innerHTML= todayDesc[i];
     if (rHours!=0){
         document.getElementById("counter").innerHTML= "<b>"+rHours+"</b>h, <b>"+ zeroPad(rMinutes) +"</b>m, <b>"+zeroPad(rSeconds)+"</b>s.";
