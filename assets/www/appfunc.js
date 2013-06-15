@@ -20,6 +20,7 @@ db.transaction(populateDB, errorCB, successCB); */
 var appv = 1.11; //REMEMBER Needs UPDATE
 var updateAvailable = false;
 var updateText;
+
 function onDeviceReady() {
 	$.ajax({
   		url: url,
@@ -39,7 +40,7 @@ function onDeviceReady() {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS holidays (id INTEGER PRIMARY KEY, dates TEXT);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS homework (id INTEGER PRIMARY KEY, lessid NUMERIC, duedate TEXT, duetime TEXT,photo BLOB, desc TEXT, done NUMERIC);');
 			console.log("PASS");
-			tx.executeSql('INSERT INTO belltimes(id,name,bells) VALUES(1,"SBHS 2013","09:00 09:05 10:05 10:10 11:10 11:50 12:50 12:55 13:55 14:15 15:15/09:00 09:05 10:05 10:10 11:10 11:50 12:50 12:55 13:55 14:15 15:15/09:00 09:05 10:05 10:10 11:10 11:30 12:30 13:10 14:10 14:15 15:15/09:00 09:05 10:05 10:10 11:10 11:30 12:30 13:10 14:10 14:15 15:15/09:30 10:25 10:30 10:10 11:25 12:05 13:00 13:05 14:00 14:20 15:15";');
+			tx.executeSql('INSERT INTO belltimes(id,name,bells) VALUES(1,"SBHS 2013","09:00 09:05 10:05 10:10 11:10 11:50 12:50 12:55 13:55 14:15 15:15/09:00 09:05 10:05 10:10 11:10 11:50 12:50 12:55 13:55 14:15 15:15/09:00 09:05 10:05 10:10 11:10 11:30 12:30 13:10 14:10 14:15 15:15/09:00 09:05 10:05 10:10 11:10 11:30 12:30 13:10 14:10 14:15 15:15/09:30 10:25 10:30 10:10 11:25 12:05 13:00 13:05 14:00 14:20 15:15");');
 			tx.executeSql('INSERT INTO weeks(id,layname,layout,days,bellid) VALUES(1,"SBHS 2013 ABC","A B C","2 3 4 5 6", 1) ;');
 		}
 		function errorCB(tx, err) {
@@ -52,5 +53,14 @@ function onDeviceReady() {
 
 	}
 	popdb();
+}
+
+//Main App Functions
+function getjs(name) {
+	$.ajax({
+	  url: "functions/"+name+".js",
+	  dataType: "script",
+	});
+
 }
 
