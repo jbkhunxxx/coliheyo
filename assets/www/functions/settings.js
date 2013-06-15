@@ -12,7 +12,7 @@ function querySuccess(tx, results) {
     console.log("DEMO table: " + len + " rows found.");
     for (var i=0; i<len; i++){
     	console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
-    }
+}
 function errorCB(err) {
 	console.log("Error processing SQL: "+err.code);
 }
