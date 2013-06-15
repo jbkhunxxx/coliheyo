@@ -56,9 +56,10 @@ function onDeviceReady() {
 }
 
 //Main App Functions
-function getjs(name) {
+function getjs(name,func) {
 	$.ajax({
 	  url: "functions/"+name+".js",
+	  success: func,
 	  dataType: "script",
 	});
 
