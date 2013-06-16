@@ -2,24 +2,39 @@
 function settings() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
-var db = window.sqlitePlugin.openDatabase({name: "timetable"});
-console.log("Settings Trying To Load");
-function queryDB(tx) {
-	tx.executeSql('SELECT * FROM belltimes', [], querySuccess, errorCB);
-}
-function querySuccess(tx, results) {
-    var len = results.rows.length;
-    console.log("DEMO table: " + len + " rows found.");
-    for (var i=0; i<len; i++){
-    	console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
-}
-function errorCB(err) {
-	console.log("Error processing SQL: "+err.code);
-}
 
-var td = document.getElementById("output");
-td.innerHTML = "New Content";
-//db.transaction(queryDB, errorCB);
-function onDeviceReady() {
-	db.transaction(queryDB, errorCB);
+/* function querySuccess(tx, results) {
+	for (var i=0; i < results.rows.length; i++){
+		row = results.rows.item(i);
+		editRecords2(row.name,row.total);
+	}
+}
+var results = 
+function errorCB(err) {
+    alert("Error processing SQL: "+err.code);
+}
+function queryDB(tx) {
+	tx.executeSql('SELECT * FROM belltimes', results, querySuccess(tx,results))
+
+} */
+function onDeviceReady(){
+	console.log("Ready Settings");
+	var db = window.openDatabase("timetable", "1.0", "timetable", 1024*1024*80);
+ 	function querySuccess(tx, results) {
+        var len = results.rows.length;
+        console.log("DEMO table: " + len + " rows found.");
+        for (var i=0; i<len; i++){
+            console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).bells);
+            document.getElementById("output").innerHTML= results.rows.item(i).bells;
+            document.getElementById("desc").innerHTML= results.rows.item(i).desc;
+        }
+    }
+ 	function queryDB(tx) {
+        tx.executeSql('SELECT * FROM belltimes', [], querySuccess, error);
+    }
+	function error(err) {
+	    alert("Error processing SQL: "+err.code);
+	}
+	db.transaction(queryDB, error);
+    
 }
