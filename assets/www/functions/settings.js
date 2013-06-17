@@ -25,7 +25,7 @@ function onDeviceReady(){
         console.log("DEMO table: " + len + " rows found.");
         for (var i=0; i<len; i++){
             console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).bells);
-            document.getElementById("output").innerHTML= results.rows.item(i).bells;
+            document.getElementById("belltimes").innerHTML= results.rows.item(i).bells;
             document.getElementById("desc").innerHTML= results.rows.item(i).desc;
         }
     }

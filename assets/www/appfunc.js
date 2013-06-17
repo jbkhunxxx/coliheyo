@@ -33,10 +33,14 @@ function onDeviceReady() {
 	function popdb() {
 		function populateDB(tx) {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS appinfo (id INTEGER PRIMARY KEY, name TEXT, value TEXT);');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS grades (id INTEGER PRIMARY KEY,lessid NUMERIC, reportid NUMERIC, grade TEXT);');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS scores (id INTEGER PRIMARY KEY,lessid NUMERIC, reportid NUMERIC, task TEXT, score NUMERIC, average NUMERIC, rank NUMERIC);');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS gradedef (id INTEGER PRIMARY KEY,name NUMERIC, reportid NUMERIC,points NUMERIC, max NUMERIC, min NUMERIC, average NUMERIC, nstudents NUMERIC);');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY, name TEXT,nstudents NUMERIC);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS weeks(id INTEGER PRIMARY KEY, layname TEXT, layout TEXT, days TEXT, bellid NUMERIC);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS belltimes(id INTEGER PRIMARY KEY, name TEXT, bells TEXT, desc TEXT);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS schoolterm (id INTEGER PRIMARY KEY, dates TEXT,weekid NUMERIC);');
-			tx.executeSql('CREATE TABLE IF NOT EXISTS lessons (id INTEGER PRIMARY KEY, name TEXT, sname TEXT, teacher TEXT, color TEXT);');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS lessons (id INTEGER PRIMARY KEY, name TEXT, sname TEXT, teacher TEXT, color TEXT, numstudents NUMERIC, totalgrade NUMERIC);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS classes (id INTEGER PRIMARY KEY, lessid NUMERIC, week TEXT, day TEXT, period NUMERIC, room TEXT);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS holidays (id INTEGER PRIMARY KEY, dates TEXT);');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS homework (id INTEGER PRIMARY KEY, lessid NUMERIC, duedate TEXT, duetime TEXT,photo TEXT, desc TEXT, done NUMERIC);');

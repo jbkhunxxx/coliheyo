@@ -1,75 +1,35 @@
 <!DOCTYPE html>
-<html>
 <head>
-    <title>Countdown Clock</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/jquery/main.css">
-    <link rel="stylesheet" href="css/fontawesome.css">
-    <link rel="stylesheet" href="font/roboto.css">
-    <script src="js/vendor/custom.modernizr.js"></script>
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/vendor/jquery-ui.js"></script>
-    <!-- More Styles Baby-->
-    <style>
-        #week {
-            font-family: "Roboto", sans-serif;
-            text-align: center;
-            font-weight: 100;
-            font-size: 14px;
-            color: #0DB518;
-            top: 7px;
-            left: 10px;
-        }
-        #description {
-            font-family: 'Roboto', sans-serif;
-	    text-align: center;
-            font-weight: 300;
-            font-size: 50px;
-            color: #000000;
-            height: 80px;
-            line-height:50px;
-            padding-top:5px;
-            padding-bottom:0px;
-        }
-	#now {
-            font-family: 'Roboto', sans-serif;
-	    text-align: center;
-            font-weight: 300;
-            font-size: 30px;
-            color: #005DD6;
-            height: 80px;
-            line-height:50px;
-            padding-top:5px;
-            padding-bottom:0px;
-        }
-        #in {
-            font-family: 'Roboto', sans-serif;
-	    text-align: center;
-            font-style: normal;
-            font-weight: 100;
-            font-size: 22px;
-            color: #000000;
-            line-height:0px;
-            padding-top:0px;
-            padding-bottom:10px;
+  <meta charset="utf-8" />
 
-        }
-        #counter {
-            font-family: 'Roboto', sans-serif;
-	    text-align: center;
-            font-size: 110px;
-            font-weight: 100;
-            color: #000000;
-            line-height: 1.1em;
-        }
-    </style>
-    <!-- App Main Source -->
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
 
+  <title>Settings</title>
+
+  <!-- Included CSS Files -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/fontawesome.css">
+  
+  <!-- Included JS Files -->
+  <script src="js/vendor/custom.modernizr.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/jquery-ui.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+  <script type="text/javascript"language="javascript"charset="utf-8" src="functions/settings.js"></script>
+  <script type="text/javascript"language="javascript"charset="utf-8" src="js/vendor/SQLitePlugin.js"></script>
+  
+  
+ <!-- App Main Source -->
+  <!--<script type="text/javascript"language="javascript"charset="utf-8">
+	  
+  </script> -->
 
 </head>
 <body onload='onLoad()'>
 	<script type="text/javascript"language="javascript"charset="utf-8" src="functions/counterv2.js"></script>
+	<script type="text/javascript"language="javascript"charset="utf-8" src="js/vendor/SQLitePlugin.js"></script>
   <!-- Header and Nav -->
   <nav class="top-bar">
     <ul class="title-area">
@@ -107,7 +67,7 @@
         <li class="divider"></li>
         <li><a href="#">Holiday</a></li>
         <li class="divider"></li>
-        <li class="active"><a>Countdown Clock</a></li>
+        <li><a href="countdown.html">Countdown Clock</a></li>
         <li class="divider"></li>
         <li class="has-dropdown">
           <a href="#">View Mode</a>
@@ -122,14 +82,21 @@
       </ul>
     </section>
   </nav>
+
 <div id="belltimes" hidden></div>
-<div id="alldesc" hidden></div>
-<div id="output"></div>
+<br><br>
+<div id="descs" hidden></div>
+<script type="text/javascript"language="JavaScript" charset="UTF-8">
+	$(document).ready(function() {
+	var belltimes = $('#belltimes').html()
+	});
+</script>
   <!-- End Header and Nav -->
 
   <!-- Main Grid Section -->
 
   <div class="row">
+
 <h1>Countdown</h1>
      <div id="week"></div>
      <div id="container" class="centered">
@@ -143,7 +110,14 @@
      </div>
 
   </div>
- 
+  </div>
+
+  <!-- End Grid Section -->
+
+
+
+  <!-- Footer -->
+
   <footer class="row">
     <div class="large-12 columns">
       <hr />
@@ -170,3 +144,4 @@
 
 </body>
 </html>
+
