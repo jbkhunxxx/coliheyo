@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<!-- Change this if you want to allow scaling -->
+    <meta name="viewport" content="width=default-width; user-scalable=no" />
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <title>TaxCalcPhoneGap</title>
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+		<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="layout.css" type="text/css" />		
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+
+	-->
+	<!-- If you application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+	<script type="text/javascript" charset="utf-8" src="../js/cordova.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/vendor/jquery.js"></script>	
+    <script type="text/javascript" charset="utf-8">
+
+
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) 
+	{ 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+
+	function onBodyLoad()
+	{
+		document.addEventListener("deviceready",onDeviceReady,false);
+	}
+
+	/* When this function is called, PhoneGap has been initialized and is ready to roll */
+	function onDeviceReady()
+	{
+        $("#addlesson").click(function(){
+            income = $("#income").val();
+        	investment = $("#investment").val();
+			infra_investment = $("#infra_investment").val();
+			housing_interest = $("#housing_interest").val();
+			medical_premium =  $("#medical_premium").val();
+			console.log(""+income+investment+infra_investment+housing_interest+medical_premium);
+			if (!income){
+				income = 0;
+			}
+			if (!investment){
+				investment = 0;
+			}
+			if (!infra_investment){
+				infra_investment = 0;
+			}
+			if (!housing_interest){
+				housing_interest = 0;
+			}
+			if (!medical_premium){
+				medical_premium = 0;
+			}
+
+			income = parseInt(income);
+			investment = parseInt(investment);			
+			infra_investment = parseInt(infra_investment);
+			housing_interest = parseInt(housing_interest);
+			medical_premium = parseInt(medical_premium);									
+
+			console.log(""+income+investment+infra_investment+housing_interest+medical_premium);
+			var tax = calculateTax(income, investment, infra_investment, housing_interest, medical_premium);
+			console.log(""+tax);			
+			calculated_tax  = $("#calculated_tax");
+			calculated_tax.html(tax);
+        });
+
+		function getTax(taxableIncome){
+		    var taxOnThisSlab;
+		    if (taxableIncome < 160000) {
+		        return 0;
+		    }
+		    else if (taxableIncome < 500000){
+		        taxOnThisSlab = 0.1 * (taxableIncome - 160000);
+		        return taxOnThisSlab;
+		    }
+		    else if (taxableIncome < 800000){
+		        taxOnThisSlab = 0.2 * (taxableIncome - 500000);
+		        return taxOnThisSlab + 34000;
+
+		    }
+		    else {
+		        taxOnThisSlab = 0.3 * (taxableIncome - 800000);
+		        return taxOnThisSlab + 94000;
+		    }
+
+		}
+
+
+		function calculateTax(income, investment, infra_investment, housing_interest, medical_premium){
+			investment = Math.max(0, Math.min(investment, 100000));
+			infra_investment = Math.max(0, Math.min(infra_investment, 20000));
+			housing_interest = Math.max(0, Math.min(housing_interest, 15000));
+			medical_premium = Math.max(0, Math.min(medical_premium, 35000));
+			var taxable_income = income -  (investment + infra_investment + housing_interest + medical_premium);
+			var tax = getTax(taxable_income);
+			return tax;
+		}
+
+
+	}
+
+
+    
+    </script>
+  </head>
+  <body onload="onBodyLoad()">
+  
+
+<input type="submit" id="addlesson" value="Add New Lesson" class="button primary">
+
+  </body>
+</html>
