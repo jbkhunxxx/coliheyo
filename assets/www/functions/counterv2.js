@@ -24,8 +24,9 @@ function countdown(belltimes2){
 function countstart(belltimes,descs){
 	console.log("PLACEHOLDER");
 	console.log("COUNTDOWN");
-	
+	var bells;
 	var day;
+	var today;
 	var todayHours;
 	var todayMinutes;
 	var todayDesc;
@@ -46,24 +47,24 @@ function countstart(belltimes,descs){
 		  x="Today it's Sunday";
 		  break;
 		case 1:
-		  var bells = pbells[0].split(";");
-		  var today = pdescs[0].split(";");
+		  bells = pbells[0].split(";");
+		  today = pdescs[0].split(";");
 		  break;
 		case 2:
-		  var bells = pbells[1].split(";");
-		  var today = pdescs[1].split(";");
+		  bells = pbells[1].split(";");
+		  today = pdescs[1].split(";");
 		  break;
 		case 3:
-		  var bells = pbells[2].split(";");
-		  var today = pdescs[2].split(";");
+		  bells = pbells[2].split(";");
+		  today = pdescs[2].split(";");
 		  break;
 		case 4:
-		  var bells = pbells[3].split(";");
-		  var today = pdescs[3].split(";");
+		  bells = pbells[3].split(";");
+		  today = pdescs[3].split(";");
 		  break;
 		case 5:
-		  var bells = pbells[4].split(";");
-		  var today = pdescs[4].split(";");
+		  bells = pbells[4].split(";");
+		  today = pdescs[4].split(";");
 		  break;
 		case 6:
 		  x="Today it's Saturday";
@@ -71,7 +72,16 @@ function countstart(belltimes,descs){
 		}
 		var dayhours = [];
 		var dayminutes = [];
-		var belen = bells.length;
+		try{
+			var belen = bells.length;
+		}
+		catch(err){
+			console.log("Too sad too bas no school today.");
+			bells=pbells[0].split(";");
+			today=pdescs[0].split(";");
+			var belen = bells.length;	
+		}
+		
 		for (var i=0; i<belen; i++){
 			bellone= bells[i];
 			var bell2 = bellone.split(":");
@@ -265,16 +275,16 @@ function countstart(belltimes,descs){
 	    return [weekNo];
 	}
 }
-function querySuccess(tx, results) {
+function belltimes(tx, results) {
 	var len = results.rows.length;
 	console.log("BELLTIMES table: " + len + " rows found.");
 	///console.log("Row = " + "0" + " ID = " + results.rows.item(0).id + " Data =  " + results.rows.item(0).bells);
 	belltimes = results.rows.item(0).bells;
 	descs = results.rows.item(0).desc;
 	countstart(belltimes,descs);
-    }
+}
 function querydb(tx) {
-    tx.executeSql('SELECT * FROM belltimes', [], querySuccess, error);
+    tx.executeSql('SELECT * FROM belltimes;', [], belltimes, error);
 }
 function error(err) {
     alert("Error processing SQL: "+err.code);

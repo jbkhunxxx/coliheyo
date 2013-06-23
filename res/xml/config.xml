@@ -86,6 +86,5 @@
       
     <!-- Deprecated plugins element. Remove in 3.0 -->
     <plugins>
-        <plugin name="SQLitePlugin" value="com.thesoftmodder.api13.timetable.html5.SQLitePlugin"/>
     </plugins>
 </widget>
