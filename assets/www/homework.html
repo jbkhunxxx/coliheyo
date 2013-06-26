@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
 
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
@@ -10,6 +10,7 @@
   <!-- Included CSS Files -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/jquery/main.css">
   <link rel="stylesheet" href="css/fontawesome.css">
   
   <!-- Included JS Files -->
@@ -18,15 +19,89 @@
   <script src="js/vendor/jquery-ui.js"></script>
   <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
   
- <!-- App Main Source -->
-  <!--<script type="text/javascript"language="javascript"charset="utf-8">
-	  
-  </script> -->
+<script type="text/javascript">
+function homework() {
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
+function onDeviceReady(){
+	var db = window.openDatabase("timetable", "1.0", "timetable", 1024 * 1024 * 80);
+	console.log("trying");
+	function dsphw(hwlist){
+		head = "<h1>Homework</h1>"
+		starttag='<table border="1"><tr><th>Due Date</th><th>Task / Subject</th><th>Description</th><th>Delete</th></tr>'
+		endtag = "</table>";
+		btn = '<button class="button success round" onclick="newhw()">Add New Homework</button>'
+		document.getElementById("hwdsp").innerHTML = head + starttag + hwlist + endtag + btn;
+	}
+	function gethw(id){
+		console.log("Not yet");
+	}
+	function finddb(tx){
+		tx.executeSql('SELECT * FROM homework;', [], hwrender, errorCB);
+	}
+	function errorCB(tx, err) {
+		console.log("error at"+err);
+	}
+	function hwrender(tx, results){
+		var finalt;
+		var len = results.rows.length;
+		if (len == 0){
+			finalt = "<tr></tr>";
+		}
+		else{
+			for (var i=0;i<results.rows.length;i++){
+				finalt+="<tr>";
+				date = results.rows.item(i).duedate;
+				title = results.rows.item(i).title;
+				task = results.rows.item(i).desc;
+				id = results.rows.item(i).id;
+				idbutton = "<span class='ui-icon ui-icon-trash'onclick='deletehw("+id+")'></span>"
+				finalt+="<td>"+date+"</td>";
+				finalt+="<td>"+title+"</td>";
+				finalt+="<td>"+task+"</td>";
+				finalt+="<td>"+idbutton+"</td>"
+				finalt+="</tr>";
+				
+			}
+		}
+
+		dsphw(finalt);
+	}
+	db.transaction(finddb, errorCB);
+/*function deletehw(id){
+	function trans(tx){
+		tx.executeSql('DELETE FROM homework WHERE id='+id+';');
+	}
+	function errorCB(tx, err) {
+		console.log("error");
+	}	
+	function successCB() {
+		console.log("DELETED");
+	}		
+}*/
+}
+function newhw(){
+	$('#hwdsp').load('datatemp/newhw.html');
+}
+function deletehw(id){
+	var db = window.openDatabase("timetable", "1.0", "timetable", 1024 * 1024 * 80);
+	console.log("In delete NOW");
+	function trans(tx){
+		tx.executeSql('DELETE FROM homework WHERE id='+id+';');
+	}
+	function error(tx, err) {
+		console.log("error");
+	}	
+	function success() {
+		console.log("DELETED");
+	}
+	db.transaction(trans,error,success);
+	onDeviceReady();
+}
+</script>
 
 </head>
-<body onload='index()'>
-  <script type="text/javascript"language="javascript"charset="utf-8" src="appfunc.js"></script>
-  <script type="text/javascript"language="javascript"charset="utf-8" src="js/vendor/SQLitePlugin.js"></script>
+<body onload='homework()'>
   <!-- Header and Nav -->
   <nav class="top-bar">
     <ul class="title-area">
@@ -86,11 +161,8 @@
   <!-- Main Grid Section -->
 
   <div class="row">
-<div id="init"></div>
-<h1>Hello</h1>
-<p>Nothing has really been done yet except for implementing countdown and homework.</p>
-<a href="c2.html" class="button success round">NEW TEST COUNTDOWN</a>
-<a href="settings.html" class="button alert round">DEBUG Settings</a>
+  <div id="hwdsp"></div>
+<!-- <input type="text" id="datepicker"> -->
   </div>
 
   <!-- End Grid Section -->
